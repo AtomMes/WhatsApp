@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 const LoginPage = () => {
-  const [idInstance, setId] = useState("");
-  const [apiTokenInstance, setToken] = useState("");
+  const [idInstance, setId] = useState("1101818622");
+  const [apiTokenInstance, setToken] = useState(
+    "f445b0dd699b44f5a7d3ed3fd540246a2551f2173abf4709ba"
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

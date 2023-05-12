@@ -4,8 +4,8 @@ import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 
 const ChatPage = () => {
-  const [message, setMessage] = useState("");
-  const [number, setNumber] = useState("");
+  const [message, setMessage] = useState("Hello atom");
+  const [number, setNumber] = useState("37498393978");
 
   const idInstance = useSelector((state) => state.user.idInstance);
   const apiTokenInstance = useSelector((state) => state.user.apiTokenInstance);
@@ -14,7 +14,6 @@ const ChatPage = () => {
 
   const sendMessage = async () => {
     if (number && message) {
-      setMessage("");
       try {
         const data = {
           chatId: `${number}@c.us`,
