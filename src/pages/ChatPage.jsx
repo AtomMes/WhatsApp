@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
@@ -21,16 +21,16 @@ const WrapperBox = styled(Box)(() => ({
 }));
 
 const ChatPage = () => {
-  const [message, setMessage] = useState("Hello atom");
-  const [number, setNumber] = useState("37498393978");
+  const [message, setMessage] = useState("");
+  const [number, setNumber] = useState("");
   const [count, setCount] = useState(0);
   const idInstance = useSelector((state) => state.user.idInstance);
   const apiTokenInstance = useSelector((state) => state.user.apiTokenInstance);
   const url = `https://api.green-api.com/waInstance${idInstance}/SendMessage/${apiTokenInstance}`;
 
   const sendMessage = async () => {
-    setCount(count + 1);
-    setMessage("");
+    setCount(count + 1); //to show the message on screen
+    setMessage(""); //reset message
     if (number && message) {
       try {
         const data = {
@@ -39,7 +39,6 @@ const ChatPage = () => {
         };
 
         const response = await axios.post(url, data);
-        console.log(response.data); // Process the response as needed
       } catch (error) {
         console.error(error);
       }
@@ -62,7 +61,9 @@ const ChatPage = () => {
       >
         <Box flex="1">
           <TextField
+            color="success"
             label="who to message..."
+            type=""
             value={number}
             onChange={(e) => setNumber(e.target.value)}
             placeholder="search for contacts"
@@ -75,7 +76,13 @@ const ChatPage = () => {
           />
         </Box>
         <Button
-          onClick={() => setCount(count + 1)}
+          onClick={() => {
+            if (number) {
+              setCount(count + 1);
+            } else {
+              alert("write the number");
+            }
+          }}
           color="success"
           variant="contained"
           sx={{
@@ -86,12 +93,18 @@ const ChatPage = () => {
           Check for messages
         </Button>
       </Box>
-      <Box height="100%" overflow="auto" padding="20px">
+      <Box
+        height="100%"
+        overflow="auto"
+        padding="20px"
+        sx={{ bgcolor: "#d5ebe4" }}
+      >
         <Messages number={number} count={count} setCount={setCount} />
       </Box>
       <Box display="flex" gap="10px" padding="10px" borderTop="1px solid gray">
         <TextField
           value={message}
+          color="success"
           size="small"
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Message"

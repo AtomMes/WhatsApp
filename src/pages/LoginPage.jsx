@@ -26,10 +26,8 @@ const StyledPaper = styled(Paper)(({ theme }) => ({
 }));
 
 const LoginPage = () => {
-  const [idInstance, setId] = useState("1101818622");
-  const [apiTokenInstance, setToken] = useState(
-    "f445b0dd699b44f5a7d3ed3fd540246a2551f2173abf4709ba"
-  );
+  const [idInstance, setId] = useState("");
+  const [apiTokenInstance, setToken] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -63,11 +61,13 @@ const LoginPage = () => {
 
       <Stack gap="15px">
         <TextField
+          color="success"
           label="idInstance"
           value={idInstance}
           onChange={(e) => setId(e.target.value)}
         />
         <TextField
+          color="success"
           label="apiTokenInstance"
           value={apiTokenInstance}
           onChange={(e) => setToken(e.target.value)}
